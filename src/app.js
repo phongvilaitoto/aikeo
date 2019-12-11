@@ -10,7 +10,7 @@ require('./plugins/mongodb') // requrie mongodb
 app.use(cors()) // use cors
 app.use(jsonParser) // use jsonpParser to read json
 app.use(urlencodedParser) // use urlendcoded
-app.use(express.static({ dotfiles: 'allow' })) // use public image
+// app.use(express.static('public',  { dotfiles: 'allow' })) // use public image
 
 // Routes
 app.use('/auth', require('./routes/api/auth'))
