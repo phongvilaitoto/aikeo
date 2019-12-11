@@ -1,0 +1,44 @@
+$color-1: #2456e5;
+$color-2: #ababab;
+$color-3: #f1f1f1;
+$color-4: #f35429;
+$bg: #f9f9f9;
+$border: #e8e8e8;
+
+$font: 'Open Sans', 'BoonBaan', sans-serif;
+
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+@mixin mobile {
+@media (max-width: #{$tablet-width}) {
+    @content;
+}
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+@import "./select3";
+
+
+body{
+  background-color: $bg;
+  font-family: $font;
+  height: 100%;
+  color: #2b2b2b;
+}
+
+html{
+  height: 100%;
+  background-color: $bg;
+}
