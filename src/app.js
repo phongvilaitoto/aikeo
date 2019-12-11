@@ -22,7 +22,7 @@ app.get('*', (req, res) => {
     if (req.headers.host.match(/^www\./)) {
         res.redirect({ "Location": "https://" + req.headers['host'] + req.url }, 301 )
     }
-    res.render('index.ejs')
+    res.render('index.html')
 })
 
 module.exports = app
