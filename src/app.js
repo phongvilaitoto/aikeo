@@ -17,4 +17,13 @@ app.use('/auth', require('./routes/api/auth'))
 app.use('/user', require('./routes/api/user'))
 
 
+// render index Vue js
+app.get('*', (req, res) => {
+    // none www
+    if (req.headers.host.match(/^www\./)) {
+        res.redirect({ "Location": "https://" + req.headers['host'] + req.url }, 301 )
+    }
+    res.render('index.ejs')
+})
+
 module.exports = app
