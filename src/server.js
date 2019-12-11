@@ -1,6 +1,8 @@
 const http = require('http')
 const app = require('./app')
-//
+const port = process.env.PORT || 3000;
+
+
 app.get('*', (req, res) => {
     // none www
     if (req.headers.host.match(/^www\./)) {
@@ -9,6 +11,6 @@ app.get('*', (req, res) => {
     res.render('index.ejs')
 })
 
-http.createServer(app).listen(80, () => {
-    console.log('server has been created')
+http.createServer(app).listen(port, () => {
+    console.log(`server has been created at port ${port}`)
 })
