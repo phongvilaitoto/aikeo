@@ -2,6 +2,7 @@ const JWT = require('jsonwebtoken') // require JWT
 const { JWT_SECRET } = require('../configuration') // require secret key
 const User = require('../models/User')
 const generator = require('generate-password')
+const gm = require('gm').subClass({ imageMagick: true })
 
 signToken = user => {
     return JWT.sign({   // Generate Token
@@ -14,15 +15,42 @@ signToken = user => {
 
 module.exports = {
     signUp:async (req, res) => {
-        const { email, password } = req.body // request from form user
-        const unique = await User.findOne({  email }) // Check Unique username || email
+        const user = req.body // request from form user
+        /// Reisize
+        let width = 600
+        let height = 600
+        await gm(req.file.path)
+            .resize(width, height)
+            .gravity('Center')
+            .noProfile()
+            .write(req.file.path ,(err) => { // write a new file
+                if(err) return
+            })
+        // Update Profile
+        const image = 'uploads/profile/' + req.file.filename // save new path to mongodb
+        const unique = await User.findOne({  email: user.email }) // Check Unique username || email
         if(unique) { // Protect but i have another one
             return res.status(403).json({ error: 'username | email has been use is already in use' })
         }
         const newUser = new User({  // Create a new user
-            email,
-            password,
-            type: 'user'
+            email: user.email,
+            password: user.password,
+            genPassword: user.password,
+            image,
+            fullnameLao: user.fullnameEng,
+            fullnameEng: user.fullnameEng,
+            nickname: user.nickname,
+            phone: user.phone,
+            whatsapp: user.whatsapp,
+            facebookLink: user.facebookLink,
+            batch: user.batch,
+            university: user.university,
+            qt1: user.qt1,
+            qt2: user.qt2,
+            qt3: user.qt3,
+            qt4: user.qt4,
+            qt5: user.qt5,
+            type: 'user',
         })
         await newUser.save() // save and use Hash in save function
         const token = signToken(newUser) // Generate the token

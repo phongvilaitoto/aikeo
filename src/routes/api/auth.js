@@ -6,10 +6,13 @@ const passportConf = require('../../plugins/passport')
 
 const passportSignIn = passport.authenticate('local', { session: false } ) // check SignIn
 
+const upload = require('../../plugins/multer')
+
 const AuthController = require('../../controllers/AuthController')
 
 router.route('/signup')
-    .post(AuthController.signUp)
+    .post(upload.single('image') ,AuthController.signUp)
+
 
 router.route('/signin')
     .post(passportSignIn, AuthController.signIn)
