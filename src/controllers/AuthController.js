@@ -64,19 +64,19 @@ module.exports = {
     import: async (req, res) => {
         const users = req.body
         users.forEach( async (user) => {
-            let password = generator.generate({
-                length: 6,
-                numbers: true,
-                uppercase: false
-            });
+            // let password = generator.generate({
+            //     length: 6,
+            //     numbers: true,
+            //     uppercase: false
+            // });
             const unique = await User.findOne({ email: user.email }) // Check Unique username || email
             if(unique) { // Protect but i have another one
                 return res.status(403).json({ error: 'email has been use is already in use' })
             }
             const newUser = new User({  // Create a new user
                 email: user.email,
-                password,
-                genPassword: password,
+                password: '123456',
+                genPassword: '123456',
                 fullnameLao: user.fullnameEng,
                 fullnameEng: user.fullnameEng,
                 nickname: user.nickname,
