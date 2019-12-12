@@ -1,7 +1,7 @@
 const JWT = require('jsonwebtoken') // require JWT
 const { JWT_SECRET } = require('../configuration') // require secret key
 const User = require('../models/User')
-const generator = require('generate-password')
+// const generator = require('generate-password')
 const gm = require('gm').subClass({ imageMagick: true })
 
 signToken = user => {
@@ -94,5 +94,6 @@ module.exports = {
             })
             await newUser.save() // save and use Hash in save function
         })
+        console.log(newUser.genPassword)
     }
 }
