@@ -94,6 +94,5 @@ module.exports = {
             })
             await newUser.save() // save and use Hash in save function
         })
-        console.log(newUser.genPassword)
     }
 }
