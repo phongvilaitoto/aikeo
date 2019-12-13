@@ -12,14 +12,14 @@ const storage = multer.diskStorage({
 })
 
 // Filter JPEG || PNG
-const fileFilter = (req, file, done) => {
-    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
-        done(null, true)
-    }
-    else {
-        done(null, false)
-    }
-}
+// const fileFilter = (req, file, done) => {
+//     if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+//         done(null, true)
+//     }
+//     else {
+//         done(null, false)
+//     }
+// }
 
 // const upload & limit size
 const upload = multer({
@@ -27,7 +27,7 @@ const upload = multer({
     limit: {
         fileSize: 1024*1024 * 5
     },
-    fileFilter
+    // fileFilter
 })
 
 // Export upload
